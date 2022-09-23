@@ -4,10 +4,19 @@ import Navigation from "./components/routes/navigation/navigation.component";
 import Authentication from "./components/routes/authentication/authentication.component";
 import Shop from "./components/routes/shop/shop.component";
 import Checkout from "./components/routes/checkout/checkout.component";
-
+import {  useEffect,  } from 'react'
+import { checkUserSession, setCurrentUser } from "./store/user/user.action";
+import { useDispatch } from "react-redux";
+import { connectFirestoreEmulator } from "firebase/firestore";
 
 
 const App = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(checkUserSession());
+    }, []);
+
     return (
         <Routes>
             <Route path='/' element={<Navigation/>}>
